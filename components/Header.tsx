@@ -1,17 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Session } from "next-auth";
-import { Avatar } from "./ui/avatar";
+import { usePathname } from "next/navigation";
+
+import Avatar from "./Avatar";
+import { cn } from "@/lib/utils";
 
 const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
+
   return (
-    <header className="my-10 flex justify-between gap-5">
+    <header className="my-10 flex items-center justify-between gap-5">
       <Link href="/">
         <Image src="/icons/logo.svg" width={40} height={40} alt="site-logo" />
       </Link>
@@ -30,12 +31,8 @@ const Header = ({ session }: { session: Session }) => {
         </li>
 
         <li>
-          <Link
-            href="/my-profile"
-            className="text-base cursor-pointer capitalize text-light-100"
-          >
-            {/* <Avatar name={session?.user?.name || ""} /> */}
-            {session?.user?.name || ""}
+          <Link href="/my-profile">
+            <Avatar name={session?.user?.name || ""} />
           </Link>
         </li>
       </ul>
